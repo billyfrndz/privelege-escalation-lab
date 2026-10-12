@@ -1,0 +1,26 @@
+services:
+  vulnerable-web:
+    build:
+      context: .
+      dockerfile: vulnerable/Dockerfile
+    container_name: web-privesc-vulnerable
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    networks:
+      - lab-network
+
+  secured-web:
+    build:
+      context: .
+      dockerfile: secured/Dockerfile
+    container_name: web-privesc-secured
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+    networks:
+      - lab-network
+
+networks:
+  lab-network:
+    driver: bridge
